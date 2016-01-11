@@ -42,6 +42,7 @@ public class UtilsToolset {
 
 		public UtilsPickaxe(ToolMaterial material, String name, String modid, Item toolmat) {
 			super(material);
+			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    listtools.add(name);
@@ -58,6 +59,7 @@ public class UtilsToolset {
 
 		public UtilsAxe(ToolMaterial material, String name, String modid, Item toolmat) {
 			super(material);
+			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    listtools.add(name);
@@ -74,6 +76,7 @@ public class UtilsToolset {
 
 		public UtilsSword(ToolMaterial material, String name, String modid, Item toolmat) {
 			super(material);
+			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    listtools.add(name);
@@ -90,6 +93,7 @@ public class UtilsToolset {
 
 		public UtilsHoe(ToolMaterial material, String name, String modid, Item toolmat) {
 			super(material);
+			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    listtools.add(name);
@@ -106,6 +110,7 @@ public class UtilsToolset {
 
 		public UtilsShovel(ToolMaterial material, String name, String modid, Item toolmat) {
 			super(material);
+			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    listtools.add(name);

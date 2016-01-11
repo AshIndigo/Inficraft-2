@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * Small Forge mod to run required methods.
  */
 //Make dummy varible declarations to make the set TODO
-//@Mod(modid = "indigoutils", version = "1.0", name = "IndigoUtils")
+@Mod(modid = "indigoutils", version = "1.0", name = "IndigoUtils")
 public class UtilsMod implements UtilsMain{
 
 	@Override

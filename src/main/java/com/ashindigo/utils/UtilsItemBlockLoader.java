@@ -9,14 +9,15 @@ public class UtilsItemBlockLoader {
 		/**
 		 * Load the automatic item, tool, and armor registers 
 		 */
-		UtilsItem.register();
-		UtilsArmor.register();
-		UtilsArmor.registerRecipes();
-		UtilsToolset.register();
-		UtilsToolset.registerRecipes();
+		//UtilsItem.register();
+		//UtilsArmor.register();
+		//UtilsToolset.register();
 	}
 	
 	public static void postInitItems() {
+		
+		UtilsArmor.registerRecipes();
+		UtilsToolset.registerRecipes();
 	}
 	
 	public static void preInitBlocks() {
@@ -26,8 +27,8 @@ public class UtilsItemBlockLoader {
 		/**
 		 * Load the automatic block registers
 		 */
-		UtilsBlock.register();
-		UtilsBlockOre.generate();
+		//UtilsBlock.register();
+		//UtilsBlockOre.generate();
 	}
 	
 	public static void postInitBlocks() {
