@@ -11,7 +11,6 @@ import net.minecraftforge.common.util.EnumHelper;
 public class InfiItems {
 	
 	// Messing with API here - Ash
-	// Armor recipe is broken - Ash //TODO
 	static UtilsItem test;
 	static UtilsArmor testhelmet;
 	static UtilsArmor testchest;
