@@ -33,7 +33,7 @@ public class UtilsMod implements UtilsMain{
 	public void postinit(FMLPostInitializationEvent event) {
 		UtilsItemBlockLoader.postInitItems();
 		UtilsItemBlockLoader.postInitBlocks();
-		GameRegistry.registerWorldGenerator(new UtilsWorldgen(), 1);
+		//GameRegistry.registerWorldGenerator(new UtilsWorldgen(), 1);
 	}
 
 }

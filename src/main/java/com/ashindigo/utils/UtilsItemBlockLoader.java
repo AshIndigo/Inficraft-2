@@ -3,21 +3,17 @@ package com.ashindigo.utils;
 public class UtilsItemBlockLoader {
 	
 	public static void preInitItems() {
+		
 	}
 		
 	public static void initItems() {
-		/**
-		 * Load the automatic item, tool, and armor registers 
-		 */
-		//UtilsItem.register();
-		//UtilsArmor.register();
-		//UtilsToolset.register();
+
 	}
 	
 	public static void postInitItems() {
 		
-		UtilsArmor.registerRecipes();
 		UtilsToolset.registerRecipes();
+		UtilsArmor.registerRecipes();
 	}
 	
 	public static void preInitBlocks() {
@@ -27,8 +23,7 @@ public class UtilsItemBlockLoader {
 		/**
 		 * Load the automatic block registers
 		 */
-		//UtilsBlock.register();
-		//UtilsBlockOre.generate();
+		UtilsBlockOre.generate();
 	}
 	
 	public static void postInitBlocks() {

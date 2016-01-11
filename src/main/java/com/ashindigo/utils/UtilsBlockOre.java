@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 /**
- * Sub-Class dedicated to adding ores with automatic smelting recipes added.
+ * Sub-Class dedicated to adding ores with automatic smelting and compression recipes added.
  * @author 19jasonides_a
  */
-public class UtilsBlockOre extends UtilsBlock{
+public class UtilsBlockOre {
 
 	public static Item Ingot;
 	public static ArrayList orelist = new ArrayList();
@@ -28,22 +29,23 @@ public class UtilsBlockOre extends UtilsBlock{
 	 * @param ore The ore block that will be smelted (Block)
 	 * @param dim The dimension number 0: Overworld 1: Nether 2: End
 	 * @param compressedblock The compressed version of the ingots
+	 * @param name The blocks name
+	 * @param modid The Mod's Modid
 	 */
-	public UtilsBlockOre(Material mat, Item ingot, Block ore, int dim, Block compressedblock) {
-		super(mat);
+	public UtilsBlockOre(Material mat, Item ingot, Block ore, int dim, Block compressedblock, String name, String modid) {
 		ingotlist.add(ingot);
 		orelist.add(ore);
 		Dim = dim;
 		CompressedBlock = compressedblock;
 		Ore = ore;
-		compressedlist .add(compressedblock);
+		compressedlist.add(compressedblock);
     }
 	/**
 	 * Default constructor used to declare variables
 	 * @param mat Just use Material.rock
 	 */
-	public UtilsBlockOre(Material mat) {
-		super(mat);
+	public UtilsBlockOre() {
+		
 	}
 	/**
 	 * 

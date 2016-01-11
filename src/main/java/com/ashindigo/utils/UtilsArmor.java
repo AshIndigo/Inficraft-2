@@ -15,14 +15,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class UtilsArmor extends ItemArmor {
 	
-	static ArrayList listitem = new ArrayList();
 	static int runtime = 0;
 	public static int multiplier = 1;
 	public static ArrayList armorlist = new ArrayList();
 	static String MODID;
 	public static String textureName;
 	static Item armor;
-	public static ArrayList itemlists = new ArrayList();
 	static Item Material;
 	
 	/**
@@ -36,7 +34,7 @@ public class UtilsArmor extends ItemArmor {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * 
+	 * For auto recipe creation please add all 4 pieces of armor in order: Helmet - Chestplate - Leggings - Boots.
 	 * @param unlocalizedName The name of the armor
 	 * @param material The armor material for the set
 	 * @param type The type of armor 
@@ -45,14 +43,13 @@ public class UtilsArmor extends ItemArmor {
 	 */
 	public UtilsArmor(String unlocalizedName, ArmorMaterial material, int type, String modid, Item mat) {
 	    super(material, 0, type);
+	    GameRegistry.registerItem(this, unlocalizedName);
 	    textureName = unlocalizedName;
 	    this.setUnlocalizedName(modid + "_" + unlocalizedName);
 	    setCreativeTab(CreativeTabs.tabCombat);
-	    listitem.add(unlocalizedName);
 	    Material = mat;
 	    armor = this;
 	    MODID = modid;
-	    itemlists.add(this);
 	}
 	
 	public static void registerRecipes(){
@@ -91,23 +88,6 @@ public class UtilsArmor extends ItemArmor {
 			
 		}
 	}
-	    	/**
-	    	 * Method that starts the automatic registration of armor.
-	    	 * Call in init method
-	    	 * See:{@link UtilsMain.init}
-	    	 * Version 1.1
-	    	 */
-	    	public static void register() {
-	    		try{
-	    		while(runtime < listitem.size()){
-	    		GameRegistry.registerItem((Item) itemlists.get(runtime), ("indigoapiarmor" + MODID + runtime));
-	    		runtime++;
-	    		}
-	    		}
-	    		catch(IndexOutOfBoundsException e){
-	    			
-	    		}
-	    	}
 	/**
 	 * Armor texture method
 	 */

@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class UtilsToolset {
 	
-	public static ArrayList listtools = new ArrayList();
 	public static int runtime = 0;
 	public static String MODID;
 	public static String textureName;
@@ -45,7 +44,6 @@ public class UtilsToolset {
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
-		    listtools.add(name);
 		    Material = toolmat;
 		    pickaxe = this;
 		    if (this != null){
@@ -62,7 +60,6 @@ public class UtilsToolset {
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
-		    listtools.add(name);
 		    Material = toolmat;
 		    axe = this;
 		    if (this != null){
@@ -79,7 +76,6 @@ public class UtilsToolset {
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
-		    listtools.add(name);
 		    Material = toolmat;
 		    sword = this;
 		    if (this != null){
@@ -96,7 +92,6 @@ public class UtilsToolset {
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
-		    listtools.add(name);
 		    Material = toolmat;
 		    hoe = this;
 		    if (this != null){
@@ -113,7 +108,6 @@ public class UtilsToolset {
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
-		    listtools.add(name);
 		    Material = toolmat;
 		    shovel = this;
 		    if (this != null){
@@ -183,22 +177,5 @@ public class UtilsToolset {
 	        	'A', Material, 'B', Items.stick
 	    	});
 	    	}
-	}
-	/**
-	 * Method that starts the automatic registration of tools.
-	 * Call in init method
-	 * See:{@link UtilsMain.init}
-	 * Version 1.1
-	 */
-	public static void register() {
-		try{
-		while(runtime < listtools.size()){
-		GameRegistry.registerItem((Item) toollists.get(runtime), ("indigoapitools" + MODID + runtime));
-		runtime++;
-		}
-		}
-		catch(IndexOutOfBoundsException e){
-			
-		}
 	}
 }
