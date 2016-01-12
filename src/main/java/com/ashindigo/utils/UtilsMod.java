@@ -1,5 +1,8 @@
 package com.ashindigo.utils;
 
+import com.philindigo.inficraft.InfiCraftMain;
+import com.philindigo.inficraft.InfiItems;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -20,13 +23,14 @@ public class UtilsMod implements UtilsMain{
 	@Override
 	@EventHandler
 	public void preinit(FMLPreInitializationEvent event) {
-		// TODO Auto-generated method stub
-		
+		//UtilsItemBlockLoader.preInitItems();
+		//UtilsItemBlockLoader.preInitBlocks();
 	}
 
 	@Override
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		UtilsJsonCreator.init("inficraft2", 0);
 		UtilsItemBlockLoader.initItems();
 		UtilsItemBlockLoader.initBlocks();
 	}

@@ -13,6 +13,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 */
 public class UtilsBlock extends Block {
 	
+	String Name;
+	
 	/**
 	 * Constructor used for declaring blocks
 	 * @param mat The material for the block
@@ -24,6 +26,8 @@ public class UtilsBlock extends Block {
 			GameRegistry.registerBlock(this, name);
 			setUnlocalizedName(modid + "_" + name);
 			setCreativeTab(CreativeTabs.tabBlock);
+			Name = name;
+			UtilsItemBlockLoader.blockreg.add(this);
 		}
 	/**
 	 * Default constructor for setting up a varible
@@ -31,5 +35,10 @@ public class UtilsBlock extends Block {
 	 */
 	public UtilsBlock(Material mat) {
 		super(mat);
+	}
+	
+	public String getName()
+	{
+		return Name;
 	}
 }

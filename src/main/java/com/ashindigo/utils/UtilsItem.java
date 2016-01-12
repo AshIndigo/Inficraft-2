@@ -25,12 +25,17 @@ public class UtilsItem extends Item {
 		setUnlocalizedName(modid + "_" + name);
 		setCreativeTab(CreativeTabs.tabMisc);
 		Name = name;
+		UtilsItemBlockLoader.itemreg.add(this);
 	}
 
 	public UtilsItem() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * No idea why I have this.
+	 * @return Returns the items name
+	 */
 	public String getName()
 	{
 		return Name;
