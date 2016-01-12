@@ -18,6 +18,7 @@ public class UtilsJsonCreator {
 	static PrintWriter pwItem;
 	static File itemJson;
 	static File blockJson;
+	static File blockStateJson;
 	static FileReader fr;
 	
 	/**
@@ -29,26 +30,24 @@ public class UtilsJsonCreator {
 	public static void init(String modid, int mode) {
 		
 		String itemloc = loader.getResource("").toString() + "assets/" + modid + "/models/item/";
+		String blockstateloc = loader.getResource("").toString() + "assets/" + modid + "/blockstates/";
 		String blockloc = loader.getResource("").toString() + "assets/" + modid + "/models/block/";
-		itemJson = new File(itemloc + "/item.json");
-		blockJson = new File(blockloc + "");
-		System.out.println(itemloc);
-		System.out.println(blockloc);
-		System.out.println(itemJson);
-		System.out.println(blockJson);
+		blockStateJson = new File(blockstateloc, "block.json");
+		itemJson = new File(itemloc + "item.json");
+		blockJson = new File(blockloc);
 		switch (mode) {
-		case 0: //initItem(modid); break;
+		case 0: initItem(modid); break;
 		case 1: //initBlock(modid); break;
 		}
 	}
 
 	private static void initItem(String modid) {
+		System.out.println(itemJson);
 		try {
-			int runtime = 0;
-			pwItem = new PrintWriter(itemJson);
-			pwItem.println("");
-			pwItem.close();
-		} catch (FileNotFoundException e) {
+			itemJson.getParentFile().mkdirs();
+			itemJson.createNewFile();
+			System.out.println(itemJson);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

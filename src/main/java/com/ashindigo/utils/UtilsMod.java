@@ -1,17 +1,11 @@
 package com.ashindigo.utils;
 
-import com.philindigo.inficraft.InfiCraftMain;
-import com.philindigo.inficraft.InfiItems;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Small Forge mod to run required methods.
@@ -40,7 +34,7 @@ public class UtilsMod implements UtilsMain{
 	public void postinit(FMLPostInitializationEvent event) {
 		UtilsItemBlockLoader.postInitItems();
 		UtilsItemBlockLoader.postInitBlocks();
-		//GameRegistry.registerWorldGenerator(new UtilsWorldgen(), 1);
+		GameRegistry.registerWorldGenerator(new UtilsWorldgen(), 1);
 	}
 
 }

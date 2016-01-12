@@ -23,8 +23,7 @@ public class UtilsBlockOre {
 	private static ArrayList compressedlist = new ArrayList();
 
 	/**
-	 * 
-	 * @param mat The material just use Material.rock
+	 * Constructor for setting up the ore
 	 * @param ingot The resulting item from the ore (Item)
 	 * @param ore The ore block that will be smelted (Block)
 	 * @param dim The dimension number 0: Overworld 1: Nether 2: End
@@ -32,7 +31,7 @@ public class UtilsBlockOre {
 	 * @param name The blocks name
 	 * @param modid The Mod's Modid
 	 */
-	public UtilsBlockOre(Material mat, Item ingot, Block ore, int dim, Block compressedblock, String name, String modid) {
+	public UtilsBlockOre(Item ingot, Block ore, int dim, Block compressedblock, String modid) {
 		ingotlist.add(ingot);
 		orelist.add(ore);
 		Dim = dim;

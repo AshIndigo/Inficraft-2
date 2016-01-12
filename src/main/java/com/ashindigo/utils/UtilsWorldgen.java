@@ -34,7 +34,6 @@ public class UtilsWorldgen implements IWorldGenerator {
     }
     public static void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY )
     {
-        //WorldGenMinable minable = new WorldGenMinable(block, (minVeinSize + random.nextInt(maxVeinSize - minVeinSize)), Blocks.stone);
     	block2 = block;
     	WorldGenMinable minable = new WorldGenMinable(block2.getDefaultState(), (minVeinSize + random.nextInt(maxVeinSize - minVeinSize)));
         for(int i = 0; i < chancesToSpawn; i++)
