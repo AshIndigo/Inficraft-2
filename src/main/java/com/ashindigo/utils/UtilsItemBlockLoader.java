@@ -2,15 +2,14 @@ package com.ashindigo.utils;
 
 import java.util.ArrayList;
 
-import com.philindigo.inficraft.InfiBlocks;
-import com.philindigo.inficraft.InfiCraftMain;
 import com.philindigo.inficraft.InfiItems;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -19,10 +18,11 @@ import net.minecraftforge.fml.relauncher.Side;
  * @author Ash Indigo
  */
 public class UtilsItemBlockLoader {
-	
+
 	public static ArrayList itemreg = new ArrayList();
 	public static ArrayList blockreg = new ArrayList();
 	public static ArrayList modidreg = new ArrayList();
+	static ArrayList json = new ArrayList();
 	public static ItemModelMesher itemRender = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 	
 	// Dont touch
@@ -40,8 +40,15 @@ public class UtilsItemBlockLoader {
 		while (modruntime < modidreg.size()) {
 		while (runtime < itemreg.size()) {
 			if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-				
-				itemRender.register((UtilsItem) itemreg.get(runtime), 0, new ModelResourceLocation(modidreg.get(modruntime) + ":" + ((UtilsItem) itemreg.get(runtime)).getName() , "inventory"));
+				json.add(UtilsMod.config.getConfigFile().getParentFile() + "/IndigoUtils" + "/models/item/" + ((UtilsItem) itemreg.get(runtime)).getName() + ".json");
+				try {
+				ModelLoader.setCustomModelResourceLocation((Item) itemreg.get(runtime), 0, new ModelResourceLocation((String) json.get(runtime), "inventory"));
+				} catch (ClassCastException e) {
+					e.printStackTrace();
+				}
+				//itemRender.simpleShapes.put(Integer.valueOf(itemRender.getIndex((UtilsItem) itemreg.get(runtime), 0)), location);
+				//itemRender.simpleShapesCache.put(Integer.valueOf(itemRender.getIndex((UtilsItem) itemreg.get(runtime), 0)), itemRender.getModelManager().getModel(location));
+				//itemRender.register((UtilsItem) itemreg.get(runtime), 0, new ModelResourceLocation(modidreg.get(modruntime) + ":" + ((UtilsItem) itemreg.get(runtime)).getName(), "inventory"));
 			}
 			runtime++;
 		}
@@ -54,6 +61,7 @@ public class UtilsItemBlockLoader {
 		
 		UtilsToolset.registerRecipes();
 		UtilsArmor.registerRecipes();
+		
 	}
 	
 	// Dont touch

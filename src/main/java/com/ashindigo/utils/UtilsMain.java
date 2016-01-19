@@ -32,5 +32,4 @@ public interface UtilsMain {
 	@EventHandler
 	public void postinit(FMLPostInitializationEvent event);
 
-
 }

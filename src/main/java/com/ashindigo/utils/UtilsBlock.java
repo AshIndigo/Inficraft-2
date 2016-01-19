@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class UtilsBlock extends Block {
 	
 	String Name;
+	public static ArrayList blockNameList = new ArrayList();
 	
 	/**
 	 * Constructor used for declaring blocks
@@ -26,6 +27,7 @@ public class UtilsBlock extends Block {
 			GameRegistry.registerBlock(this, name);
 			setUnlocalizedName(modid + "_" + name);
 			setCreativeTab(CreativeTabs.tabBlock);
+			blockNameList.add(name);
 			Name = name;
 			UtilsItemBlockLoader.blockreg.add(this);
 		}

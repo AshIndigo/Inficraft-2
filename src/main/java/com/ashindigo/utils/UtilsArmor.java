@@ -47,15 +47,25 @@ public class UtilsArmor extends ItemArmor {
 	    textureName = unlocalizedName;
 	    this.setUnlocalizedName(modid + "_" + unlocalizedName);
 	    setCreativeTab(CreativeTabs.tabCombat);
+	    canRepair = true;
+	    armorlist.add(this);
 	    Material = mat;
 	    armor = this;
 	    MODID = modid;
 	}
 	
+	//Might be buggy TODO
+	@Override
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	{
+	        return Material == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+
 	public static void registerRecipes(){
-		try{
+		try {
 		int armorruntime = 0;
 		while(armorruntime < armorlist.size() / 4){
+			
 		GameRegistry.addRecipe(new ItemStack((Item) armorlist.get(0 * multiplier), 1), new Object[]{
 		        "AAA",
 		        "A A",

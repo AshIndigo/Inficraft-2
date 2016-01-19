@@ -23,8 +23,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class UtilsToolset {
 	
 	public static int runtime = 0;
-	public static String MODID;
-	public static String textureName;
 	public static ArrayList toollists = new ArrayList();
 	public static Item Material;
 	public static Item pickaxe;

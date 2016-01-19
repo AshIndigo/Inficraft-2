@@ -18,12 +18,14 @@ import net.minecraftforge.fml.relauncher.Side;
 public class UtilsItem extends Item {
 	
 	String Name;
+	public static ArrayList itemNameList = new ArrayList();
 	
 	public UtilsItem(String modid, String name){
 		
 		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(modid + "_" + name);
 		setCreativeTab(CreativeTabs.tabMisc);
+		itemNameList.add(name);
 		Name = name;
 		UtilsItemBlockLoader.itemreg.add(this);
 	}

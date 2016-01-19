@@ -19,6 +19,10 @@ public class InfiItems {
 		
 		test = new UtilsItem(InfiCraftMain.modid, "test");
 		test2 = new UtilsItem(InfiCraftMain.modid, "test2");
+		UtilsArmor helm = new UtilsArmor("helm", ARMORGOLDIRON, 0, "inficraft2", test);
+		UtilsArmor chest = new UtilsArmor("chest", ARMORGOLDIRON, 1, "inficraft2", test);
+		UtilsArmor leg = new UtilsArmor("leg", ARMORGOLDIRON, 2, "inficraft2", test);
+		UtilsArmor boot = new UtilsArmor("boot", ARMORGOLDIRON, 3, "inficraft2", test);
 	}
 
 }
