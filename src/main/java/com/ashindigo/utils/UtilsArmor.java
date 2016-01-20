@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * Class used for making armor with the added functionality of automatically registering the armor and adding recipes.
  * @author 19jasonides_a
  */
+// TODO Add insta-create without the number stuff.
 public class UtilsArmor extends ItemArmor {
 	
 	static int runtime = 0;
@@ -24,7 +25,7 @@ public class UtilsArmor extends ItemArmor {
 	static Item Material;
 	
 	/**
-	 * Default constructor used for declaring a default varible
+	 * Default constructor used for declaring a default variable
 	 * @param armormaterial An armor material doesnt matter what it is.
 	 * @param int1 Dunno
 	 * @param int2 Dunno
@@ -33,6 +34,21 @@ public class UtilsArmor extends ItemArmor {
 		super(armormaterial, int1, int2);
 		// TODO Auto-generated constructor stub
 	}
+	
+	/**
+	 * Auto creates an entire armor set.
+	 * @param unlocalizedName The name of the armor
+	 * @param material The armor material for the set
+	 * @param modid The modid of your mod
+	 * @param mat The item used for crafting the armor
+	 */
+	public static void createArmorSet(String unlocalizedName, ArmorMaterial material, String modid, Item mat) {
+		UtilsArmor dummyhelmet = new UtilsArmor(unlocalizedName + "helmet", material, 0, modid, mat);
+		UtilsArmor dummychestplate = new UtilsArmor(unlocalizedName + "chestplate", material, 1, modid, mat);
+		UtilsArmor dummyleggings = new UtilsArmor(unlocalizedName + "leggings", material, 2, modid, mat);
+		UtilsArmor dummyboots = new UtilsArmor(unlocalizedName + "boots", material, 3, modid, mat);
+	}
+	
 	/**
 	 * For auto recipe creation please add all 4 pieces of armor in order: Helmet - Chestplate - Leggings - Boots.
 	 * @param unlocalizedName The name of the armor

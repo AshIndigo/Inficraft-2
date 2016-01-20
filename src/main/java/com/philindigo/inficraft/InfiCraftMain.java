@@ -25,8 +25,7 @@ public class InfiCraftMain implements UtilsMain {
 	public void preinit(FMLPreInitializationEvent event) {
 		
 		config = new Configuration(event.getSuggestedConfigurationFile());
-		System.out.println(3);
-		UtilsMod.addModReg(modid, event.getSuggestedConfigurationFile().getAbsolutePath());
+		//UtilsMod.addModReg(modid, event.getSuggestedConfigurationFile().getAbsolutePath());
 	}
 
 	@Override

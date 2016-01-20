@@ -2,7 +2,7 @@ package com.philindigo.inficraft;
 
 import com.ashindigo.utils.UtilsArmor;
 import com.ashindigo.utils.UtilsItem;
-import com.ashindigo.utils.UtilsToolset.UtilsSword;
+import com.ashindigo.utils.UtilsToolset;
 
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -19,10 +19,16 @@ public class InfiItems {
 		
 		test = new UtilsItem(InfiCraftMain.modid, "test");
 		test2 = new UtilsItem(InfiCraftMain.modid, "test2");
+		/*
 		UtilsArmor helm = new UtilsArmor("helm", ARMORGOLDIRON, 0, "inficraft2", test);
 		UtilsArmor chest = new UtilsArmor("chest", ARMORGOLDIRON, 1, "inficraft2", test);
 		UtilsArmor leg = new UtilsArmor("leg", ARMORGOLDIRON, 2, "inficraft2", test);
 		UtilsArmor boot = new UtilsArmor("boot", ARMORGOLDIRON, 3, "inficraft2", test);
+		*/
+		UtilsToolset testtools = new UtilsToolset(AlloyMat, "testto", "inficraft2", test);
+		UtilsToolset testtools2 = new UtilsToolset(AlloyMat, "testto2", "inficraft2", test2);
+		UtilsArmor.createArmorSet("testarmor", ARMORGOLDIRON, "inficraft2", test);
+		UtilsArmor.createArmorSet("testarmor2", ARMORGOLDIRON, "inficraft2", test2);
 	}
 
 }

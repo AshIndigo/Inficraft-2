@@ -30,7 +30,8 @@ public class UtilsItemBlockLoader {
 		
 	}
 	/**
-	* Start the auto json register (Try that modid function out)
+	* Start the auto json register
+	* Modid function may be broken
 	* @author Ash Indigo
 	*/
 	public static void initItems() {
@@ -40,12 +41,8 @@ public class UtilsItemBlockLoader {
 		while (modruntime < modidreg.size()) {
 		while (runtime < itemreg.size()) {
 			if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-				json.add(UtilsMod.config.getConfigFile().getParentFile() + "/IndigoUtils" + "/models/item/" + ((UtilsItem) itemreg.get(runtime)).getName() + ".json");
-				try {
+				
 				ModelLoader.setCustomModelResourceLocation((Item) itemreg.get(runtime), 0, new ModelResourceLocation((String) json.get(runtime), "inventory"));
-				} catch (ClassCastException e) {
-					e.printStackTrace();
-				}
 				//itemRender.simpleShapes.put(Integer.valueOf(itemRender.getIndex((UtilsItem) itemreg.get(runtime), 0)), location);
 				//itemRender.simpleShapesCache.put(Integer.valueOf(itemRender.getIndex((UtilsItem) itemreg.get(runtime), 0)), itemRender.getModelManager().getModel(location));
 				//itemRender.register((UtilsItem) itemreg.get(runtime), 0, new ModelResourceLocation(modidreg.get(modruntime) + ":" + ((UtilsItem) itemreg.get(runtime)).getName(), "inventory"));
@@ -56,7 +53,9 @@ public class UtilsItemBlockLoader {
 		}
 	}
 	
-	// Loads recipes
+	/**
+	 * Loads recipes
+	 */
 	public static void postInitItems() {
 		
 		UtilsToolset.registerRecipes();
@@ -70,6 +69,7 @@ public class UtilsItemBlockLoader {
 	}
 	/**
 	 * Initiates the auto model loader
+	 * Modid function may be broken
 	 * @author Ash Indigo
 	 */
 	public static void initBlocks() {

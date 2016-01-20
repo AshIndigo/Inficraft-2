@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemPickaxe;
@@ -31,8 +32,19 @@ public class UtilsToolset {
 	public static Item hoe;
 	public static Item shovel;
 
-	public UtilsToolset() {
-		// TODO Auto-generated constructor stub
+	/**
+	 * 
+	 * @param material The ToolMaterial for the set.
+	 * @param name The name of the item will have the tool's function added to it. I.E If the name is Test then the resulting name will be Testpickaxe
+	 * @param modid The Mod's Modid.
+	 * @param toolmat The item used to create the tools.
+	 */
+	public UtilsToolset(ToolMaterial material, String name, String modid, Item toolmat) {
+		Item dummypickaxe = new UtilsPickaxe(material, name + "pickaxe", modid, toolmat);
+		Item dummyaxe = new UtilsAxe(material, name + "axe", modid, toolmat);
+		Item dummysword = new UtilsSword(material, name + "sword", modid, toolmat);
+		Item dummyhoe = new UtilsHoe(material, name + "hoe", modid, toolmat);
+		Item dummyshovel = new UtilsShovel(material, name + "shovel", modid, toolmat);
 	}
 	
 	public static class UtilsPickaxe extends ItemPickaxe{
