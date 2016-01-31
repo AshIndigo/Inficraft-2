@@ -2,9 +2,26 @@ package com.ashindigo.utils;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarOutputStream;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import net.minecraftforge.fml.common.FMLLog;
+import scala.tools.nsc.io.Jar;
+import scala.tools.nsc.settings.ScalaBuild;
 
 /**
  * Automatic Json creator
@@ -20,6 +37,9 @@ public class UtilsJsonCreator {
 	static int runtime2 = 0;
 	static int runtime3 = 0;
 	static int runtime4 = 0;
+	public static final Logger logger = LogManager.getLogger("MyMod");
+	static File itemJson;
+	static JarEntry jsonEntry;
 	
 	/**
 	 * Starts the auto json creator
@@ -37,7 +57,7 @@ public class UtilsJsonCreator {
 			modFolderBlock.mkdirs();
 			modFolderBlockstate.mkdirs();
 			while (runtime1 < UtilsItem.itemNameList.size()) {
-				File itemJson = new File(modFolderItem, UtilsItem.itemNameList.get(runtime1) + ".json");
+				itemJson = new File(modFolderItem, UtilsItem.itemNameList.get(runtime1) + ".json");
 				fw = new FileWriter(itemJson.getAbsoluteFile());
 				bw = new BufferedWriter(fw);
 				itemJson.createNewFile();
@@ -64,8 +84,6 @@ public class UtilsJsonCreator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	private static void itemJsonCreate(String modid, String name) {
@@ -107,9 +125,9 @@ public class UtilsJsonCreator {
 			bw.write("}");
 			bw.newLine();
 			bw.close();
+			jsonEntry = new JarEntry("assets/" + modid + "/models/item/" + UtilsItem.itemNameList.get(runtime1) + ".json");
 			runtime1++;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -126,6 +144,24 @@ public class UtilsJsonCreator {
 
 	private static void blockItemJsonCreate(String modid, String name) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * Appends to marked mods
+	 */
+	public static void insertJsons() {
+		try {
+			FileOutputStream fos = new FileOutputStream(UtilsJsonTest.jsonJars.get(0).toString(), true);
+			JarOutputStream jos = new JarOutputStream(fos);
+			jos.putNextEntry(jsonEntry);
+            System.out.println("JSON is in");
+			jos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("No jars detected for Auto-Json creation!");
+		}
 		
 	}
 }

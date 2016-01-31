@@ -7,8 +7,9 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation to mark a mod for Auto-Json creation
- * @author 19jasonides_a
+ * @author Ash Indigo
  */
+// TODO Might want to add some data
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface UtilsJson {

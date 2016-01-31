@@ -12,12 +12,14 @@ public class InfiItems {
 	
 	public static UtilsItem test;
 	public static UtilsItem test2;
+	public static UtilsItem test3;
 	public static ArmorMaterial ARMORGOLDIRON = EnumHelper.addArmorMaterial("GoldIron", "GoldIron", 14, new int[] {2, 6, 4, 2}, 30);
 	public static ToolMaterial AlloyMat = EnumHelper.addToolMaterial("AlloyMat", 2, 400, 5.5F, 2.5F, 30);
 
 	public static void init() {
 		
 		test = new UtilsItem(InfiCraftMain.modid, "test");
+		test3 = new UtilsItem(InfiCraftMain.modid, "test3");
 		test2 = new UtilsItem(InfiCraftMain.modid, "test2");
 		/*
 		UtilsArmor helm = new UtilsArmor("helm", ARMORGOLDIRON, 0, "inficraft2", test);

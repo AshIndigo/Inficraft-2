@@ -39,6 +39,7 @@ public class UtilsToolset {
 	 * @param modid The Mod's Modid.
 	 * @param toolmat The item used to create the tools.
 	 */
+	// TODO Can only be once used
 	public UtilsToolset(ToolMaterial material, String name, String modid, Item toolmat) {
 		Item dummypickaxe = new UtilsPickaxe(material, name + "pickaxe", modid, toolmat);
 		Item dummyaxe = new UtilsAxe(material, name + "axe", modid, toolmat);

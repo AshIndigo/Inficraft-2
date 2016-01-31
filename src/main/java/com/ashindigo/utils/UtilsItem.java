@@ -31,7 +31,7 @@ public class UtilsItem extends Item {
 	}
 
 	public UtilsItem() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	/**

@@ -1,6 +1,8 @@
 package com.ashindigo.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -13,7 +15,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * Class used for making armor with the added functionality of automatically registering the armor and adding recipes.
  * @author 19jasonides_a
  */
-// TODO Add insta-create without the number stuff.
 public class UtilsArmor extends ItemArmor {
 	
 	static int runtime = 0;
@@ -32,7 +33,6 @@ public class UtilsArmor extends ItemArmor {
 	 */
 	public UtilsArmor(ArmorMaterial armormaterial, int int1, int int2) {
 		super(armormaterial, int1, int2);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -42,6 +42,8 @@ public class UtilsArmor extends ItemArmor {
 	 * @param modid The modid of your mod
 	 * @param mat The item used for crafting the armor
 	 */
+	//TODO Only lets creation of one recipe set
+	// Possibly add another recipe set for this using an ArrayList
 	public static void createArmorSet(String unlocalizedName, ArmorMaterial material, String modid, Item mat) {
 		UtilsArmor dummyhelmet = new UtilsArmor(unlocalizedName + "helmet", material, 0, modid, mat);
 		UtilsArmor dummychestplate = new UtilsArmor(unlocalizedName + "chestplate", material, 1, modid, mat);
@@ -70,7 +72,7 @@ public class UtilsArmor extends ItemArmor {
 	    MODID = modid;
 	}
 	
-	//Might be buggy TODO
+	//TODO Might be buggy
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
@@ -80,8 +82,7 @@ public class UtilsArmor extends ItemArmor {
 	public static void registerRecipes(){
 		try {
 		int armorruntime = 0;
-		while(armorruntime < armorlist.size() / 4){
-			
+		while(armorruntime < armorlist.size() / 4) {
 		GameRegistry.addRecipe(new ItemStack((Item) armorlist.get(0 * multiplier), 1), new Object[]{
 		        "AAA",
 		        "A A",
@@ -111,7 +112,7 @@ public class UtilsArmor extends ItemArmor {
 	}
 		}
 		catch(IndexOutOfBoundsException e){
-			
+			e.printStackTrace();
 		}
 	}
 	/**

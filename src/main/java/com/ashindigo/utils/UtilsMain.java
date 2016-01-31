@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 */
 public interface UtilsMain {
 	
+	//String jarName;
+	
 	/**
 	* The preinit event for Forge
 	* Make sure to add @EventHandler
@@ -31,5 +33,11 @@ public interface UtilsMain {
 	*/
 	@EventHandler
 	public void postinit(FMLPostInitializationEvent event);
+	
+	/**
+	 * Method to get the jar files name
+	 * @return Returns the Jar's file name.
+	 */
+	//public void getJarName();
 
 }

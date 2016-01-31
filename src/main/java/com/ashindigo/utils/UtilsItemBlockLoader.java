@@ -42,10 +42,7 @@ public class UtilsItemBlockLoader {
 		while (runtime < itemreg.size()) {
 			if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 				
-				ModelLoader.setCustomModelResourceLocation((Item) itemreg.get(runtime), 0, new ModelResourceLocation((String) json.get(runtime), "inventory"));
-				//itemRender.simpleShapes.put(Integer.valueOf(itemRender.getIndex((UtilsItem) itemreg.get(runtime), 0)), location);
-				//itemRender.simpleShapesCache.put(Integer.valueOf(itemRender.getIndex((UtilsItem) itemreg.get(runtime), 0)), itemRender.getModelManager().getModel(location));
-				//itemRender.register((UtilsItem) itemreg.get(runtime), 0, new ModelResourceLocation(modidreg.get(modruntime) + ":" + ((UtilsItem) itemreg.get(runtime)).getName(), "inventory"));
+				itemRender.register((UtilsItem) itemreg.get(runtime), 0, new ModelResourceLocation(modidreg.get(modruntime) + ":" + ((UtilsItem) itemreg.get(runtime)).getName(), "inventory"));
 			}
 			runtime++;
 		}
