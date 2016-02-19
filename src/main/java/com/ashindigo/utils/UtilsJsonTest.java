@@ -3,6 +3,7 @@ package com.ashindigo.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -10,10 +11,12 @@ import java.util.Enumeration;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-
-import sun.reflect.CallerSensitive;
-
+/**
+ * Used to test mods for the @UtilsJson annotation
+ * @see UtilsJson
+ * @author 19jasonides_a
+ *
+ */
 public class UtilsJsonTest {
 	
 	// Various arrays for marking files
@@ -21,13 +24,12 @@ public class UtilsJsonTest {
 	static File assets = new File(UtilsJsonTest.class.getProtectionDomain().getCodeSource().getLocation().getPath() + "/");
 	static File bin = new File(assets.getParentFile().getParentFile().getParentFile().getParentFile().toString() + "/");
 	public static ArrayList markedJars = new ArrayList();
-	public static ArrayList jsonJars = new ArrayList();
 
 	/**
 	 * Tests all jars in the mod folder for the UtilsJson annotation.
 	 * @see UtilsJson
 	 */
-	public static void init() {
+	public static ArrayList init(Class<? extends Annotation> annotation, ArrayList jarList) {
 		try {
 		URL[] binFileArray = { bin.toURI().toURL() };
 		URLClassLoader urlClass = new URLClassLoader(binFileArray, UtilsJsonTest.class.getClassLoader());
@@ -47,7 +49,7 @@ public class UtilsJsonTest {
 			}
 			runtime2++;
 		}
-		// Tests classes for @UtilsJson annotation
+		// Tests classes for the specified annotation annotation
 		int runtime3 = 0;
 		while (runtime3  < markedJars.size()) {
 			FileInputStream fis = new FileInputStream(markedJars.get(runtime3).toString());
@@ -58,9 +60,8 @@ public class UtilsJsonTest {
 					String clazz = em.nextElement().toString();
 					if (clazz.endsWith(".class")) {
 						Class obj = urlClass.loadClass(clazz.replace("/", ".").replace(".class", ""));
-						//System.out.println(obj.toString() + " " + obj.isAnnotationPresent(UtilsJson.class));
-						if (obj.isAnnotationPresent(UtilsJson.class)) {
-							jsonJars.add(markedJars.get(runtime3));
+						if (obj.isAnnotationPresent(annotation)) {
+							jarList.add(markedJars.get(runtime3));
 						}
 					}
 			}
@@ -70,13 +71,14 @@ public class UtilsJsonTest {
 			runtime3++;
 		}
 		urlClass.close();
+				
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return jarList;
 	}
 
 }

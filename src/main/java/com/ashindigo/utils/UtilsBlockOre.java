@@ -41,7 +41,6 @@ public class UtilsBlockOre {
     }
 	/**
 	 * Default constructor used to declare variables
-	 * @param mat Just use Material.rock
 	 */
 	public UtilsBlockOre() {
 		
@@ -57,7 +56,6 @@ public class UtilsBlockOre {
 	 * Used for the ore generation
 	 */
 	public static void generate() {
-		UtilsWorldgen worldgen = new UtilsWorldgen();
 		switch (Dim) {
             case 0: UtilsWorldgen.OverworldList.add(Ore); break;
             case 1: UtilsWorldgen.NetherList.add(Ore); break;

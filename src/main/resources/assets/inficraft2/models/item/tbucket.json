@@ -1,12 +1,12 @@
 {
     "parent": "builtin/generated",
     "textures": {  	
-        "layer0": "inficraft2:items/test"
+        "layer0": "inficraft2:items/tbucket"
     },
     "display": {
         "thirdperson": {
             "rotation": [ -90, 0, 0 ],
-            "translation": [ 0, 1, -2.25 ],
+            "translation": [ 0, 1, -3 ],
             "scale": [ 0.55, 0.55, 0.55 ]
         },
         "firstperson": {

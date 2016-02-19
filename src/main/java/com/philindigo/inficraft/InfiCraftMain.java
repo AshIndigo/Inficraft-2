@@ -25,14 +25,13 @@ public class InfiCraftMain implements UtilsMain {
 	public void preinit(FMLPreInitializationEvent event) {
 		
 		config = new Configuration(event.getSuggestedConfigurationFile());
-		//UtilsMod.addModReg(modid, event.getSuggestedConfigurationFile().getAbsolutePath());
+		UtilsMod.modidList.add(modid);
 	}
 
 	@Override
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		
-		UtilsItemBlockLoader.modidreg.add(modid);
 		InfiItems.init();
 		InfiBlocks.init();
 	}

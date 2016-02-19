@@ -1,5 +1,5 @@
 {
-	"variants": {
-		"normal": { "model": "inficraft2:testore" }
-	}
+    "variants": {
+        "normal": { "model": "inficraft2:testore" }
+    }
 }

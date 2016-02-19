@@ -1,11 +1,11 @@
 package com.ashindigo.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 /**
  * Currently broken
+ * TODO Fix??? Test
  * @author 19jasonides_a
  */
 
@@ -22,6 +23,7 @@ public class UtilsWorldgen implements IWorldGenerator {
     	public static ArrayList OverworldList = new ArrayList();
     	public static ArrayList NetherList = new ArrayList();
     	public static ArrayList EndList = new ArrayList();
+    	public static Map<Block, UtilsWorldgenData> OverworldMap = new HashMap();
     	static Block block2;
 
 	@Override
@@ -32,6 +34,19 @@ public class UtilsWorldgen implements IWorldGenerator {
             case -1: oregenNether(random, chunkX * 16, chunkZ * 16, world); break;
         }
     }
+	/**
+	 * 
+	 * @param block
+	 * @param world
+	 * @param random
+	 * @param blockXPos
+	 * @param blockZPos
+	 * @param minVeinSize
+	 * @param maxVeinSize
+	 * @param chancesToSpawn
+	 * @param minY
+	 * @param maxY
+	 */
     public static void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY )
     {
     	block2 = block;

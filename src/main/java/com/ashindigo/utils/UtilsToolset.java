@@ -25,6 +25,7 @@ public class UtilsToolset {
 	
 	public static int runtime = 0;
 	public static ArrayList toollists = new ArrayList();
+	public static ArrayList toollistsname = new ArrayList();
 	public static Item Material;
 	public static Item pickaxe;
 	public static Item axe;
@@ -33,97 +34,166 @@ public class UtilsToolset {
 	public static Item shovel;
 
 	/**
-	 * 
+	 * Constructor to add a complete toolset.
+	 * Currently non-functional.
 	 * @param material The ToolMaterial for the set.
 	 * @param name The name of the item will have the tool's function added to it. I.E If the name is Test then the resulting name will be Testpickaxe
 	 * @param modid The Mod's Modid.
 	 * @param toolmat The item used to create the tools.
 	 */
 	// TODO Can only be once used
+	@Deprecated
 	public UtilsToolset(ToolMaterial material, String name, String modid, Item toolmat) {
+		/*
 		Item dummypickaxe = new UtilsPickaxe(material, name + "pickaxe", modid, toolmat);
 		Item dummyaxe = new UtilsAxe(material, name + "axe", modid, toolmat);
 		Item dummysword = new UtilsSword(material, name + "sword", modid, toolmat);
 		Item dummyhoe = new UtilsHoe(material, name + "hoe", modid, toolmat);
 		Item dummyshovel = new UtilsShovel(material, name + "shovel", modid, toolmat);
+		*/
 	}
 	
-	public static class UtilsPickaxe extends ItemPickaxe{
+	public static class UtilsPickaxe extends ItemPickaxe implements IItemMethods {
 
-		public UtilsPickaxe(ToolMaterial material, String name, String modid, Item toolmat) {
+		String Name;
+		
+		public UtilsPickaxe(ToolMaterial material, String name, String modid, Item toolmat, String translatedName) {
 			super(material);
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    Material = toolmat;
 		    pickaxe = this;
+		    Name = name;
 		    if (this != null){
 			    toollists.add(this);
+			    toollistsname.add(name);
+			    UtilsItem.modItems.put(modid, this);
+			    UtilsItem.itemNameList.put(this, name);
+			    UtilsItemBlockLoader.itemreg.add(this);
+			    UtilsItem.translatedNameList.put(this, translatedName);
 			    }
+		}
+
+		@Override
+		public String getName() {
+			return Name;
 		}
 		
 	}
 	
-	public static class UtilsAxe extends ItemAxe{
+	public static class UtilsAxe extends ItemAxe implements IItemMethods {
 
-		public UtilsAxe(ToolMaterial material, String name, String modid, Item toolmat) {
+		String Name;
+		
+		public UtilsAxe(ToolMaterial material, String name, String modid, Item toolmat, String translatedName) {
 			super(material);
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    Material = toolmat;
 		    axe = this;
+		    Name = name;
 		    if (this != null){
 			    toollists.add(this);
+			    toollistsname.add(name);
+			    UtilsItem.modItems.put(modid, this);
+			    UtilsItem.itemNameList.put(this, name);
+			    UtilsItemBlockLoader.itemreg.add(this);
+			    UtilsItem.translatedNameList.put(this, translatedName);
 			    }
+		}
+
+		@Override
+		public String getName() {
+			return Name;
 		}
 		
 	}
 	
-	public static class UtilsSword extends ItemSword{
+	public static class UtilsSword extends ItemSword implements IItemMethods {
 
-		public UtilsSword(ToolMaterial material, String name, String modid, Item toolmat) {
+		String Name;
+		
+		public UtilsSword(ToolMaterial material, String name, String modid, Item toolmat, String translatedName) {
 			super(material);
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    Material = toolmat;
 		    sword = this;
+		    Name = name;
 		    if (this != null){
 			    toollists.add(this);
+			    toollistsname.add(name);
+			    UtilsItem.modItems.put(modid, this);
+			    UtilsItem.itemNameList.put(this, name);
+			    UtilsItemBlockLoader.itemreg.add(this);
+			    UtilsItem.translatedNameList.put(this, translatedName);
 			    }
+		}
+
+		@Override
+		public String getName() {
+			return Name;
 		}
 		
 	}
 	
-	public static class UtilsHoe extends ItemHoe{
+	public static class UtilsHoe extends ItemHoe implements IItemMethods {
 
-		public UtilsHoe(ToolMaterial material, String name, String modid, Item toolmat) {
+		String Name;
+		
+		public UtilsHoe(ToolMaterial material, String name, String modid, Item toolmat, String translatedName) {
 			super(material);
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    Material = toolmat;
 		    hoe = this;
+		    Name = name;
 		    if (this != null){
 			    toollists.add(this);
+			    toollistsname.add(name);
+			    UtilsItem.modItems.put(modid, this);
+			    UtilsItem.itemNameList.put(this, name);
+			    UtilsItemBlockLoader.itemreg.add(this);
+			    UtilsItem.translatedNameList.put(this, translatedName);
 			    }
+		}
+
+		@Override
+		public String getName() {
+			return Name;
 		}
 		
 	}
 	
-	public static class UtilsShovel extends ItemSpade{
+	public static class UtilsShovel extends ItemSpade implements IItemMethods {
 
-		public UtilsShovel(ToolMaterial material, String name, String modid, Item toolmat) {
+		String Name;
+		
+		public UtilsShovel(ToolMaterial material, String name, String modid, Item toolmat, String translatedName) {
 			super(material);
 			GameRegistry.registerItem(this, name);
 			this.setUnlocalizedName(modid + "_" + name);
 		    setCreativeTab(CreativeTabs.tabCombat);
 		    Material = toolmat;
 		    shovel = this;
+		    Name = name;
 		    if (this != null){
 			    toollists.add(this);
+			    toollistsname.add(name);
+			    UtilsItem.modItems.put(modid, this);
+			    UtilsItem.itemNameList.put(this, name);
+			    UtilsItemBlockLoader.itemreg.add(this);
+			    UtilsItem.translatedNameList.put(this, translatedName);
 			    }
+		}
+
+		@Override
+		public String getName() {
+			return Name;
 		}
 		
 	}

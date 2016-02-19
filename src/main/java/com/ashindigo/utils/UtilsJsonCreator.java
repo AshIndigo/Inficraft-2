@@ -5,23 +5,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import net.minecraftforge.fml.common.FMLLog;
-import scala.tools.nsc.io.Jar;
-import scala.tools.nsc.settings.ScalaBuild;
 
 /**
  * Automatic Json creator
@@ -32,14 +22,18 @@ public class UtilsJsonCreator {
 	static File configFolder =  UtilsMod.config.getConfigFile().getParentFile();
 	static FileWriter fw;
 	static BufferedWriter bw;
-	static File mainloc = new File(configFolder + "/IndigoUtils/");
+	static File mainloc = new File(configFolder.getParentFile().getParentFile() + "/src/main/resources/assets");
 	static int runtime1 = 0;
 	static int runtime2 = 0;
 	static int runtime3 = 0;
 	static int runtime4 = 0;
-	public static final Logger logger = LogManager.getLogger("MyMod");
-	static File itemJson;
-	static JarEntry jsonEntry;
+	static int runtime5 = 0;
+	static int runtime6 = 0;
+	static int multiplier = 0;
+	static File helmItemJson;
+	static File chestItemJson;
+	static File legItemJson;
+	static File bootItemJson;
 	
 	/**
 	 * Starts the auto json creator
@@ -56,45 +50,111 @@ public class UtilsJsonCreator {
 			modFolderItem.mkdirs();
 			modFolderBlock.mkdirs();
 			modFolderBlockstate.mkdirs();
-			while (runtime1 < UtilsItem.itemNameList.size()) {
-				itemJson = new File(modFolderItem, UtilsItem.itemNameList.get(runtime1) + ".json");
+			// Calls each method for the items and blocks.
+			while (runtime1 < UtilsItem.modItems.size()) {
+				File itemJson = new File(modFolderItem, UtilsItem.itemNameList.get(UtilsItem.modItems.get(modid).get(runtime1)) + ".json");
 				fw = new FileWriter(itemJson.getAbsoluteFile());
 				bw = new BufferedWriter(fw);
 				itemJson.createNewFile();
-				itemJsonCreate(modid, (String) UtilsItem.itemNameList.get(runtime1));
+				itemJsonCreate(modid, UtilsItem.itemNameList.get(UtilsItem.modItems.get(modid).get(runtime1)));
 			}
 			while (runtime2 < UtilsBlock.blockNameList.size()) {
-				File blockJson = new File(modFolderBlock, UtilsBlock.blockNameList.get(runtime2) + ".json");
+				File blockJson = new File(modFolderBlock, UtilsBlock.blockNameList.get(UtilsBlock.modBlocks.get(modid).get(runtime2)) + ".json");
+				fw = new FileWriter(blockJson.getAbsoluteFile());
+				bw = new BufferedWriter(fw);
 				blockJson.createNewFile();
-				blockJsonCreate(modid, (String) UtilsBlock.blockNameList.get(runtime2));
+				blockJsonCreate(modid, UtilsBlock.blockNameList.get(UtilsBlock.modBlocks.get(modid).get(runtime2)));
 				runtime2++;
 			}
 			while (runtime3 < UtilsBlock.blockNameList.size()) {
-				File blockstateJson = new File(modFolderBlockstate, UtilsBlock.blockNameList.get(runtime3) + ".json");
+				File blockstateJson = new File(modFolderBlockstate, UtilsBlock.blockNameList.get(UtilsBlock.modBlocks.get(modid).get(runtime3)) + ".json");
+				fw = new FileWriter(blockstateJson.getAbsoluteFile());
+				bw = new BufferedWriter(fw);
 				blockstateJson.createNewFile();
-				blockstateJsonCreate(modid, (String) UtilsBlock.blockNameList.get(runtime3));
+				blockstateJsonCreate(modid, UtilsBlock.blockNameList.get(UtilsBlock.modBlocks.get(modid).get(runtime3)));
 				runtime3++;
 			}
 			while (runtime4 < UtilsBlock.blockNameList.size()) {
-				File blockItemJson = new File(modFolderItem, UtilsBlock.blockNameList.get(runtime4) + ".json");
+				File blockItemJson = new File(modFolderItem, UtilsBlock.blockNameList.get(UtilsBlock.modBlocks.get(modid).get(runtime4)) + ".json");
+				fw = new FileWriter(blockItemJson.getAbsoluteFile());
+				bw = new BufferedWriter(fw);
 				blockItemJson.createNewFile();
-				blockItemJsonCreate(modid, (String) UtilsBlock.blockNameList.get(runtime4));
+				blockItemJsonCreate(modid, UtilsBlock.blockNameList.get(UtilsBlock.modBlocks.get(modid).get(runtime4)));
 				runtime4++;
+			}
+			while (runtime5 < UtilsToolset.toollists.size()) {
+				File toolItemJson = new File(modFolderItem, UtilsItem.itemNameList.get(UtilsItem.modItems.get(modid).get(runtime5)) + ".json");
+				fw = new FileWriter(toolItemJson.getAbsoluteFile());
+				bw = new BufferedWriter(fw);
+				modFolderItem.createNewFile();
+				toolItemJsonCreate(modid, (String) UtilsToolset.toollistsname.get(runtime5));
+				runtime5++;
+			}
+			while (runtime6 < UtilsArmor.armorlist.size() / 4) {
+				helmItemJson = new File(modFolderItem, UtilsItem.itemNameList.get(UtilsItem.modItems.get(modid).get(runtime6)) + ".json");
+				chestItemJson = new File(modFolderItem, UtilsArmor.armorNameList.get(1 + multiplier) + ".json");
+				legItemJson = new File(modFolderItem, UtilsArmor.armorNameList.get(2 + multiplier) + ".json");
+				bootItemJson = new File(modFolderItem, UtilsArmor.armorNameList.get(3 + multiplier)  + ".json");
+				modFolderItem.createNewFile();
+				armorItemJsonCreate(modid);
+				runtime6++;
+				multiplier = multiplier + 4;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static void itemJsonCreate(String modid, String name) {
+	private static void armorItemJsonCreate(String modid) {
 		try {
+			fw = new FileWriter(helmItemJson.getAbsoluteFile());
+			bw = new BufferedWriter(fw);
 			bw.write("{");
 			bw.newLine();
 			bw.write("    \"parent\": \"builtin/generated\",");
 			bw.newLine();
-			bw.write("    \"textures\": {");
+			bw.write("    \"textures\": {  	");
 			bw.newLine();
-			bw.write("        \"layer0\": \"" + modid + ":items/" + name);
+			bw.write("        \"layer0\": \"" + modid + ":items/" + helmItemJson.getName().replaceAll(".json", "") + "\"");
+			bw.newLine();
+			bw.write("    },");
+			bw.newLine();
+			bw.write("    \"display\": {");
+			bw.newLine();
+			bw.write("        \"thirdperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ -90, 0, 0 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 1, -2.25 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 0.55, 0.55, 0.55 ]");
+			bw.newLine();
+			bw.write("        },");
+			bw.newLine();
+			bw.write("        \"firstperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ 0, -135, 25 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 4, 2 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 1.7, 1.7, 1.7 ]");
+			bw.newLine();
+			bw.write("        }");
+			bw.newLine();
+			bw.write("    }");
+			bw.newLine();
+			bw.write("}");
+			bw.newLine();
+			bw.close();
+			fw = new FileWriter(chestItemJson.getAbsoluteFile());
+			bw = new BufferedWriter(fw);
+			bw.write("{");
+			bw.newLine();
+			bw.write("    \"parent\": \"builtin/generated\",");
+			bw.newLine();
+			bw.write("    \"textures\": {  	");
+			bw.newLine();
+			bw.write("        \"layer0\": \"" + modid + ":items/" + chestItemJson.getName().replaceAll(".json", "") + "\"");
 			bw.newLine();
 			bw.write("    },");
 			bw.newLine();
@@ -125,43 +185,284 @@ public class UtilsJsonCreator {
 			bw.write("}");
 			bw.newLine();
 			bw.close();
-			jsonEntry = new JarEntry("assets/" + modid + "/models/item/" + UtilsItem.itemNameList.get(runtime1) + ".json");
+			fw = new FileWriter(legItemJson.getAbsoluteFile());
+			bw = new BufferedWriter(fw);
+			bw.write("{");
+			bw.newLine();
+			bw.write("    \"parent\": \"builtin/generated\",");
+			bw.newLine();
+			bw.write("    \"textures\": {  	");
+			bw.newLine();
+			bw.write("        \"layer0\": \"" + modid + ":items/" + legItemJson.getName().replaceAll(".json", "") + "\"");
+			bw.newLine();
+			bw.write("    },");
+			bw.newLine();
+			bw.write("    \"display\": {");
+			bw.newLine();
+			bw.write("        \"thirdperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ -90, 0, 0 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 1, -3 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 0.55, 0.55, 0.55 ]");
+			bw.newLine();
+			bw.write("        },");
+			bw.newLine();
+			bw.write("        \"firstperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ 0, -135, 25 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 4, 2 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 1.7, 1.7, 1.7 ]");
+			bw.newLine();
+			bw.write("        }");
+			bw.newLine();
+			bw.write("    }");
+			bw.newLine();
+			bw.write("}");
+			bw.newLine();
+			bw.close();
+			fw = new FileWriter(bootItemJson.getAbsoluteFile());
+			bw = new BufferedWriter(fw);
+			bw.write("{");
+			bw.newLine();
+			bw.write("    \"parent\": \"builtin/generated\",");
+			bw.newLine();
+			bw.write("    \"textures\": {  	");
+			bw.newLine();
+			bw.write("        \"layer0\": \"" + modid + ":items/" + bootItemJson.getName().replaceAll(".json", "") + "\"");
+			bw.newLine();
+			bw.write("    },");
+			bw.newLine();
+			bw.write("    \"display\": {");
+			bw.newLine();
+			bw.write("        \"thirdperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ -90, 0, 0 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 1, -2.5 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 0.55, 0.55, 0.55 ]");
+			bw.newLine();
+			bw.write("        },");
+			bw.newLine();
+			bw.write("        \"firstperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ 0, -135, 25 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 4, 2 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 1.7, 1.7, 1.7 ]");
+			bw.newLine();
+			bw.write("        }");
+			bw.newLine();
+			bw.write("    }");
+			bw.newLine();
+			bw.write("}");
+			bw.newLine();
+			bw.close();
 			runtime1++;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static void blockJsonCreate(String modid, String name) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private static void blockstateJsonCreate(String modid, String name) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private static void blockItemJsonCreate(String modid, String name) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * Creates Json-Files for items.
+	 * @param modid The Mod's Modid
+	 * @param name The block's name
+	 */
+	private static void itemJsonCreate(String modid, String name) {
+		try {
+			bw.write("{");
+			bw.newLine();
+			bw.write("    \"parent\": \"builtin/generated\",");
+			bw.newLine();
+			bw.write("    \"textures\": {  	");
+			bw.newLine();
+			bw.write("        \"layer0\": \"" + modid + ":items/" + name + "\"");
+			bw.newLine();
+			bw.write("    },");
+			bw.newLine();
+			bw.write("    \"display\": {");
+			bw.newLine();
+			bw.write("        \"thirdperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ -90, 0, 0 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 1, -3 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 0.55, 0.55, 0.55 ]");
+			bw.newLine();
+			bw.write("        },");
+			bw.newLine();
+			bw.write("        \"firstperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ 0, -135, 25 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 4, 2 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 1.7, 1.7, 1.7 ]");
+			bw.newLine();
+			bw.write("        }");
+			bw.newLine();
+			bw.write("    }");
+			bw.newLine();
+			bw.write("}");
+			bw.newLine();
+			bw.close();
+			runtime1++;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * Appends to marked mods
+	 * Creates Json-Files for blocks.
+	 * @param modid The Mod's Modid
+	 * @param name The block's name
 	 */
-	public static void insertJsons() {
+	private static void blockJsonCreate(String modid, String name) {
 		try {
-			FileOutputStream fos = new FileOutputStream(UtilsJsonTest.jsonJars.get(0).toString(), true);
-			JarOutputStream jos = new JarOutputStream(fos);
-			jos.putNextEntry(jsonEntry);
-            System.out.println("JSON is in");
-			jos.close();
+			bw.write("{");
+			bw.newLine();
+			bw.write("    \"parent\": \"block/cube_all\",");
+			bw.newLine();
+			bw.write("    \"textures\": {");
+			bw.newLine();
+			bw.write("        \"all\": \"" + modid + ":blocks/" + name + "\"");
+			bw.newLine();
+			bw.write("    }");
+			bw.newLine();
+			bw.write("}");
+			bw.newLine();
+			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("No jars detected for Auto-Json creation!");
 		}
-		
+	}
+
+	/**
+	 * Creates Json-Files for blocks-states.
+	 * @param modid The Mod's Modid
+	 * @param name The block's name
+	 */
+	private static void blockstateJsonCreate(String modid, String name) {
+		try {
+			bw.write("{");
+			bw.newLine();
+			bw.write("    \"variants\": {");
+			bw.newLine();
+			bw.write("        \"normal\": { \"model\": \"" + modid + ":" + name + "\" }");
+			bw.newLine();
+			bw.write("    }");
+			bw.newLine();
+			bw.write("}");
+			bw.newLine();
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Creates Json-Files for blocks.
+	 * @param modid The Mod's Modid
+	 * @param name The block's name
+	 */
+	private static void blockItemJsonCreate(String modid, String name) {
+		try {
+		bw.write("{");
+		bw.newLine();
+		bw.write("    \"parent\": \"builtin/generated\",");
+		bw.newLine();
+		bw.write("    \"textures\": {  	");
+		bw.newLine();
+		bw.write("        \"layer0\": \"" + modid + ":blocks/" + name + "\"");
+		bw.newLine();
+		bw.write("    },");
+		bw.newLine();
+		bw.write("    \"display\": {");
+		bw.newLine();
+		bw.write("        \"thirdperson\": {");
+		bw.newLine();
+		bw.write("            \"rotation\": [ -90, 0, 0 ],");
+		bw.newLine();
+		bw.write("            \"translation\": [ 0, 1, -3 ],");
+		bw.newLine();
+		bw.write("            \"scale\": [ 0.55, 0.55, 0.55 ]");
+		bw.newLine();
+		bw.write("        },");
+		bw.newLine();
+		bw.write("        \"firstperson\": {");
+		bw.newLine();
+		bw.write("            \"rotation\": [ 0, -135, 25 ],");
+		bw.newLine();
+		bw.write("            \"translation\": [ 0, 4, 2 ],");
+		bw.newLine();
+		bw.write("            \"scale\": [ 1.7, 1.7, 1.7 ]");
+		bw.newLine();
+		bw.write("        }");
+		bw.newLine();
+		bw.write("    }");
+		bw.newLine();
+		bw.write("}");
+		bw.newLine();
+		bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Creates Json-Files for tools.
+	 * @param modid The Mod's Modid
+	 * @param name The item name
+	 */
+	private static void toolItemJsonCreate(String modid, String name) {
+		try {
+			bw.write("{");
+			bw.newLine();
+			bw.write("    \"parent\": \"builtin/generated\",");
+			bw.newLine();
+			bw.write("    \"textures\": {  	");
+			bw.newLine();
+			bw.write("        \"layer0\": \"" + modid + ":items/" + name + "\"");
+			bw.newLine();
+			bw.write("    },");
+			bw.newLine();
+			bw.write("    \"display\": {");
+			bw.newLine();
+			bw.write("        \"thirdperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ 0, 90, -35 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 1.25, -3.5 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 0.85, 0.85, 0.85 ]");
+			bw.newLine();
+			bw.write("        },");
+			bw.newLine();
+			bw.write("        \"firstperson\": {");
+			bw.newLine();
+			bw.write("            \"rotation\": [ 0, -135, 25 ],");
+			bw.newLine();
+			bw.write("            \"translation\": [ 0, 4, 2 ],");
+			bw.newLine();
+			bw.write("            \"scale\": [ 1.7, 1.7, 1.7 ]");
+			bw.newLine();
+			bw.write("        }");
+			bw.newLine();
+			bw.write("    }");
+			bw.newLine();
+			bw.write("}");
+			bw.newLine();
+			bw.close();
+			runtime1++;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
